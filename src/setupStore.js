@@ -1,16 +1,10 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import campaignReducer from './redux/reducers/campaigns';
-import filterFormReducer from './redux/reducers/filterForm';
+import { init } from '@rematch/core'
+import * as models from './models';
+import selectPlugin from '@rematch/select'
 
-const rootReducer = combineReducers({
-  campaigns: campaignReducer,
-  filters: filterFormReducer,
+const store = init({
+  models,
+  plugins: [selectPlugin()]
 });
 
-// using applyMiddleware to add thunk middleware to the store
-const store = createStore(rootReducer, applyMiddleware(thunk));
-
-const getStore = () => store;
-
-export default getStore;
+export default store

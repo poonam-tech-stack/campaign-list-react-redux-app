@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from '@rematch/select';
 import moment from 'moment';
 import { InputDateFormat, OutputDateFormat } from '../constants/dateConstants';
 import { isCampaignActive, filterCampaigns } from '../utils/campaignUtilMethods';

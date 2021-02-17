@@ -1,12 +1,6 @@
 import moment from 'moment';
-import {
-  CHANGE_START_DATE,
-  CHANGE_END_DATE,
-  CHANGE_SEARCH_TERM,
-  RESET_FILTERS,
-} from '../actions/actionTypes';
-import logger from '../../utils/logger';
-import { InputDateFormat } from '../../constants/dateConstants';
+import logger from '../utils/logger';
+import { InputDateFormat } from '../constants/dateConstants';
 
 const initialState = {
   startDate: null,
@@ -41,15 +35,15 @@ const changeDate = (state, date, property) => {
 };
 
 //Update startDate filter in global store
-const changeStartDate = (state, { payload: { startDate } = {} } = {}) =>
+const changeStartDate = (state,  { startDate } = {} ) =>
   changeDate(state, startDate, 'startDate');
 
 //Update endDate filter in global store
-const changeEndDate = (state, { payload: { endDate } = {} } = {}) =>
+const changeEndDate = (state, { endDate } = {}) =>
   changeDate(state, endDate, 'endDate');
 
 //Update searchTerm (campaign name) filter in global store
-const changeSearchTerm = (state, { payload: { searchTerm } = {} } = {}) => ({
+const changeSearchTerm = (state,{ searchTerm } = {} ) => ({
   ...state,
   searchTerm: searchTerm || null,
 });
@@ -59,19 +53,21 @@ const resetFilters = () => ({
   ...initialState,
 });
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case CHANGE_START_DATE:
-      return changeStartDate(state, action);
-    case CHANGE_END_DATE:
-      return changeEndDate(state, action);
-    case CHANGE_SEARCH_TERM:
-      return changeSearchTerm(state, action);
-    case RESET_FILTERS:
+const filters = {
+  state: initialState,
+  reducers: {
+    changeStartDate(state, payload){
+      return changeStartDate(state, payload);
+    },
+    changeEndDate(state, payload){
+      return changeEndDate(state, payload);
+    },
+    changeSearchTerm(state, payload){
+      return changeSearchTerm(state, payload);
+    },
+    resetFilters(){
       return resetFilters();
-    default:
-      return state;
+    },
   }
-};
-
-export default reducer;
+}
+export default filters;

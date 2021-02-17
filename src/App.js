@@ -5,7 +5,6 @@ import Filters from './containers/Filters';
 import Campaigns from './containers/Campaigns';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCampaignsData } from './redux/thunk/campaigns';
 
 //Contains skeleton structure of the website
 const App = () => {
@@ -14,7 +13,7 @@ const App = () => {
   useEffect(() => {
     //AddCampaigns global method on window object
     window.AddCampaigns = (newCampaigns) => {
-      dispatch(addCampaignsData({newCampaigns}));
+      dispatch.campaigns.addCampaignsData({newCampaigns});
     };
   }, [dispatch]);
 

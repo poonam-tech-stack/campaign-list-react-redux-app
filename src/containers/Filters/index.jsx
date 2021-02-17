@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { InputDateFormat } from '../../constants/dateConstants';
-import * as actions from '../../redux/actions/filterForm';
 import './index.css';
 import FilterForm from '../../components/FilterForm';
 import { selectFilters } from '../../selectors/campaignSelector';
@@ -17,22 +16,22 @@ const Filters = () => {
 
   //Update when start date filter is changed
   const changeStartDateHandler = (startDate) => {
-    dispatch(actions.changeStartDate({ startDate }));
+    dispatch.filters.changeStartDate({ startDate });
   };
 
   //Update when end date filter is changed
   const changeEndDateHandler = (endDate) => {
-    dispatch(actions.changeEndDate({ endDate }));
+    dispatch.filters.changeEndDate({ endDate });
   };
 
   //Update when campaign name search filter is changed
   const changeSearchTermHandler = (evt) => {
     const searchTerm = evt.target.value;
-    dispatch(actions.changeSearchTerm({ searchTerm }));
+    dispatch.filters.changeSearchTerm({ searchTerm });
   };
 
   const handleReset = () => {
-    dispatch(actions.resetFilters());
+    dispatch.filters.resetFilters();
   };
 
   const toggleFiltersHandler = () => {
